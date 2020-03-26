@@ -4,6 +4,7 @@ import 'package:eat_where/pages/group_page.dart';
 import 'package:eat_where/pages/home_page.dart';
 import 'package:eat_where/pages/login_page.dart';
 import 'package:eat_where/pages/me_page.dart';
+import 'package:eat_where/utils/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -20,25 +21,30 @@ Future<void> main() async {
   runApp(App(false));
 }
 
+/*
+  Entry point of the entire app.
+ */
 class App extends StatelessWidget {
   App(this.hasValidated);
 
-  // Username of current user
   final bool hasValidated;
 
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       title: 'Eat Where',
       theme: ThemeData(
-        primarySwatch: Colors.orange,
+        primarySwatch: ColorUtils.themeColor,
       ),
+      // If user is logged in, direct to Home. Otherwise, show the LoginPage.
       home: hasValidated ? Home() : LoginPage(),
     );
   }
 }
 
+/*
+  Home screen that manages three tabs.
+ */
 class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
@@ -46,10 +52,18 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
 
-  int _tabIndex = 0;
   final _pages = <Widget>[HomePage(), GroupPage(), MePage()];
+  final _pageTitles = <String>["Recommendation for you", "Groups", "Profile"];
   final _tabIcons = <IconData>[Icons.home, Icons.group, Icons.account_circle];
   final _tabTitles = <Text>[Text("Home"), Text("Groups"), Text("Me")];
+
+  int _tabIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _tabIndex = 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,9 +71,13 @@ class _HomeState extends State<Home> {
       children: _pages,
       index: _tabIndex,
     );
+
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home page"),
+        title: Text(
+          _pageTitles[_tabIndex],
+          style: TextStyle(color: ColorUtils.lightColor),
+        ),
       ),
       body: bodyStack,
       bottomNavigationBar: CupertinoTabBar(

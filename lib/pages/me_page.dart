@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 
+/*
+  Me tab.
+ */
 class MePage extends StatefulWidget {
   @override
   _MePageState createState() => _MePageState();
