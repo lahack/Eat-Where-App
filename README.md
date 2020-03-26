@@ -18,4 +18,4 @@ samples, guidance on mobile development, and a full API reference.
 ## Notes
 
 - All UI design can be found in `concept_images` folder.
-- Always work on branches.
+- Always work on branches and submit Pull Requests before merging.
