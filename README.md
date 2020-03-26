@@ -4,8 +4,6 @@ A restaurant recommendation app for everyone.
 
 ## Getting Started (Tutorial)
 
-This project is a starting point for a Flutter application.
-
 A few resources to get you started if this is your first Flutter project:
 
 - [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
@@ -17,5 +15,5 @@ samples, guidance on mobile development, and a full API reference.
 
 ## Notes
 
-- All UI design can be found in `concept_images` folder.
+- All UI design can be found in `concept_images` folder and also [here](https://xd.adobe.com/view/b231f29c-471d-4b5b-560e-e0affe9ca5e3-c400/).
 - Always work on branches and submit Pull Requests before merging.
