@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 /*
   Me tab.
  */
@@ -9,132 +10,152 @@ class MePage extends StatefulWidget {
 }
 
 class _MePageState extends State<MePage> {
+  final Map<int, Widget> segtabs = const <int, Widget>{
+    0: Text('History'),
+    1: Text('Preference'),
+    2: Text('Settings'),
+  };
+
+  final color = Colors.amber[800];
+  final size = 36.0;
+  final Map<int, Widget> icons = <int, Widget>{
+    0: new ListView(
+        children: <Widget>[
+          ListTile(
+            leading: Icon(Icons.wb_sunny),
+            title: Text('Everybody\'s Kitchen'),
+            trailing: FavoriteWidget(),
+          ),
+          ListTile(
+            leading: Icon(Icons.brightness_3),
+            title: Text('Parkside Canteen'),
+            trailing: FavoriteWidget(),
+          ),
+          ListTile(
+            leading: Icon(Icons.wb_sunny),
+            title: Text('Bcd Tofu House'),
+            trailing: FavoriteWidget(),
+          ),
+        ],
+      ),
+    1: Center(
+      child: FlutterLogo(
+        colors: Colors.teal,
+        size: 200.0,
+      ),
+    ),
+    2: Center(
+      child: FlutterLogo(
+        colors: Colors.cyan,
+        size: 200.0,
+      ),
+    ),
+  };
+
+  int sharedValue = 0;
+
   @override
-  /*
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return MaterialApp(
-      home: DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            bottom: TabBar(
-              tabs: [
-                Tab(icon: Icon(Icons.directions_car)),
-                Tab(icon: Icon(Icons.directions_transit)),
-                Tab(icon: Icon(Icons.directions_bike)),
-              ],
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              Center(
-                child:Text("Schedule"),),
-              Center(
-                child:Text("Schedule"),),
-              Center(
-                child:Text("Schedule"),),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}*/
-  Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
+    return new MaterialApp(
+      home: new Scaffold(
+        body: Column(
+          children: <Widget>[
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(
+                  width: 500.0,
+                  height: 30.0,),
                 Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    'Oeschinen Lake Campground',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
+                    width: 130.0,
+                    height: 130.0,
+                    decoration: new BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: new DecorationImage(
+                            fit: BoxFit.fill,
+                            image: new NetworkImage(
+                                "https://i.imgur.com/BoN9kdC.png")
+                        )
+                    )),
+                const Padding(
+                  padding: EdgeInsets.all(10.0),
+                  child: Text("Black Superman",
+                      textScaleFactor: 1.3),
                 ),
-                Text(
-                  'Kandersteg, Switzerland',
-                  style: TextStyle(
-                    color: Colors.grey[500],
-                  ),
+                SizedBox(
+                width: 500.0,
+                height: 10.0,
                 ),
               ],
             ),
-          ),
-          /*3*/
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          Text('41'),
-        ],
-      ),
-    );
-
-    Color color = Colors.amber[800];
-
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildButtonColumn(color, Icons.call, 'CALL'),
-          _buildButtonColumn(color, Icons.near_me, 'ROUTE'),
-          _buildButtonColumn(color, Icons.share, 'SHARE'),
-        ],
-      ),
-    );
-
-    Widget textSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Text(
-            'Lake Oeschinen lies at the foot of the Blüemlisalp in the Bernese '
-            'Alps. Situated 1,578 meters above sea level, it is one of the '
-            'larger Alpine Lakes. A gondola ride from Kandersteg, followed by a '
-            'half-hour walk through pastures and pine forest, leads you to the '
-            'lake, which warms to 20 degrees Celsius in the summer. Activities '
-            'enjoyed here include rowing, and riding the summer toboggan run.',
-        softWrap: true,
-      ),
-    );
-
-    return MaterialApp(
-      title: 'Flutter layout demo',
-      home: Scaffold(
-        body: ListView(
-          children: [
-            titleSection,
-            buttonSection,
-            textSection,
+            const Padding(
+              padding: EdgeInsets.all(16.0),
+            ),
+            SizedBox(
+              width: 500.0,
+              child: CupertinoSegmentedControl<int>(
+                borderColor: Colors.grey,
+                pressedColor: Colors.grey,
+                selectedColor: Colors.grey,
+                children: segtabs,
+                onValueChanged: (int val) {
+                  setState(() {
+                    sharedValue = val;
+                  });
+                },
+                groupValue: sharedValue,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: 0.0,
+                  horizontal: 16.0,
+                ),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10.0,
+                    horizontal: 0.0,
+                  ),
+                  child: icons[sharedValue],
+                ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
+}
 
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
+class FavoriteWidget extends StatefulWidget {
+  @override
+  _FavoriteWidgetState createState() => _FavoriteWidgetState();
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorit = false;
+  void _toggleFavorite() {
+    setState(() {
+      if (_isFavorit) {
+        _isFavorit = false;
+      } else {
+        _isFavorit = true;
+      }
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Row(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, color: color),
         Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
+          padding: EdgeInsets.all(0),
+          child: IconButton(
+            icon: (_isFavorit ? Icon(Icons.star) : Icon(Icons.star_border)),
+            color: Colors.amber[800],
+            onPressed: _toggleFavorite,
           ),
         ),
       ],
