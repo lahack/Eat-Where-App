@@ -7,23 +7,24 @@ class Preference extends StatefulWidget {
 }
 
 class _PreferenceState extends State<Preference> {
+  //todo buggy stuff here, size of text got limited. one more character then we dead
+  List<CustomButton> _ButtonList = [CustomButton(), CustomButton(), CustomButton(), CustomButton()];
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        SizedBox(height: 25),
-        Divider(),
-        Row(
-          children: <Widget>[
-            CustomButton(),
-            CustomButton(),
-            CustomButton(),
-          ],
-        ),
+    return Scaffold(
+        body: GridView.count(
+            crossAxisCount: 3,
+            childAspectRatio: 2,
+            padding: const EdgeInsets.all(10),
+            crossAxisSpacing: 0,
+            mainAxisSpacing: 10,
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: _ButtonList,
+        )
+    );
         //todo add parameter here to create a different button with tags fetched
         //from db
-      ],
-    );
   }
 }
 
@@ -40,7 +41,7 @@ class CustomButton extends StatelessWidget {
           fillColor: Colors.amber[700],
           splashColor: Colors.amberAccent,
           child: Padding(
-            padding: EdgeInsets.all(8.0),
+            padding: EdgeInsets.all(10.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: const <Widget>[
@@ -50,9 +51,6 @@ class CustomButton extends StatelessWidget {
                   maxLines: 1,
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
-                SizedBox(
-                  width: 5.0,
-                ),
                 Icon(
                   Icons.highlight_off,
                   color: Colors.amberAccent,
@@ -60,10 +58,9 @@ class CustomButton extends StatelessWidget {
               ],
             ),
           ),
-        onPressed: null,
-        //todo change null here into link with database
-        shape: const StadiumBorder(),
-        )
-    );
+          onPressed: null,
+          //todo change null here into link with database
+          shape: const StadiumBorder(),
+        ));
   }
 }

@@ -53,7 +53,10 @@ class _MePageState extends State<MePage> {
                         image: new DecorationImage(
                             fit: BoxFit.fill,
                             image: new NetworkImage(
-                                "https://i.imgur.com/BoN9kdC.png")))),
+                                "https://i.imgur.com/BoN9kdC.png")
+                        )
+                    )
+                ),
                 const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text("Black Superman", textScaleFactor: 1.3),

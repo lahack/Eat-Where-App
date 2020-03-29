@@ -1,3 +1,4 @@
+import 'package:eat_where/pages/group_manage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -34,6 +35,10 @@ class _AddGroupPageState extends State<AddGroupPage> {
             ),
             onPressed: () {
               // TODO: validate input and send data to chat page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => GroupManage()),
+              );
             },
           )
         ],
