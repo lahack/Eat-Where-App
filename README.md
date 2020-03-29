@@ -2,7 +2,7 @@
 
 A restaurant recommendation app for everyone.
 
-## Group members
+## Team members
 - Lihan Zhu
 - Haoqin Deng
 - Shuaiqing Luo
