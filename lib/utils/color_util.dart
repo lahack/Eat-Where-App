@@ -11,4 +11,5 @@ class ColorUtils {
   static get themeColor => Colors.orange;
 
   static get borderColor => Colors.black;
+
 }
