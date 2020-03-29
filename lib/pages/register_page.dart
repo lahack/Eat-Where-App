@@ -1,3 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
+
+import '../main.dart';
 import '../utils/color_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
@@ -13,6 +16,22 @@ class _RegisterPageState extends State<RegisterPage> {
   String _password;
   String _confirmPassword;
   String _username;
+
+  Future<void> _fireAuthSignUp() async {
+    FirebaseAuth.instance.createUserWithEmailAndPassword(
+        email: _username, password: _password)
+        .then((authResult) {
+      Navigator.pushAndRemoveUntil(
+        context,
+        MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
+            (Route<dynamic> route) => false,
+      );
+    })
+        .catchError((error) {
+      print(error);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final usernameField = TextFormField(
@@ -75,7 +94,7 @@ class _RegisterPageState extends State<RegisterPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
+        onPressed: () async {
           //Get the result and deliver it to the back end
           final form = _formKey.currentState;
           form.save();
@@ -83,6 +102,7 @@ class _RegisterPageState extends State<RegisterPage> {
           if (form.validate()) {
             print('username: $_username, password: $_password');
             //TODO -> GO TO FIREBASE AND TRAVERSE TO ANOTHER PAGE
+            _fireAuthSignUp();
           }
         },
         child: Text("SignUp",
@@ -94,7 +114,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
     return Scaffold(
         appBar: AppBar(
-          title: Text('Eat-where'),
+          title: Text('Eat-where',
+            style: TextStyle(color: ColorUtils.lightColor),
+          ),
         ),
         body: Center(
           child: Container(
