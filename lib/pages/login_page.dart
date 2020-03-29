@@ -1,8 +1,10 @@
 //import 'package:eat_where/main.dart';
 import 'package:eat_where/pages/register_page.dart';
 import 'package:flutter/material.dart';
-import '../utils/color_util.dart';
 import 'package:flutter/cupertino.dart';
+
+import '../utils/color_util.dart';
+import './home_page.dart';
 
 /*
   Login page.
@@ -55,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
+
     final loginButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
@@ -69,6 +72,12 @@ class _LoginPageState extends State<LoginPage> {
           if (form.validate()) {
             print('username: $_username, password: $_password');
             //TODO -> GO TO FIREBASE AND TRAVERSE TO ANOTHER PAGE
+
+            Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => HomePage()),
+            (Route<dynamic> route) => false,
+          );
           }
         },
         child: Text("Login",
