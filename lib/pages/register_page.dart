@@ -1,17 +1,8 @@
-//import 'package:eat_where/main.dart';
-import 'package:eat_where/pages/register_page.dart';
-import 'package:flutter/material.dart';
 import '../utils/color_util.dart';
+import 'package:flutter/material.dart';
 
-/*
-  Login page.
- */
-class LoginPage extends StatefulWidget {
-  @override
-  _LoginPageState createState() => _LoginPageState();
-}
 
-class _LoginPageState extends State<LoginPage> {
+class RegisterPage extends StatelessWidget {
   TextStyle textStyle = TextStyle(fontSize: 20.0);
 
   @override
@@ -25,7 +16,7 @@ class _LoginPageState extends State<LoginPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
-
+    
     final passwordField = TextField(
       obscureText: false,
       style: textStyle,
@@ -35,36 +26,34 @@ class _LoginPageState extends State<LoginPage> {
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
-    final loginButton = Material(
+
+    final confirmPassField = TextField(
+      obscureText: false,
+      style: textStyle,
+      decoration: InputDecoration(
+        contentPadding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+        hintText: "Confirm password",
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
+    );
+    
+    final signUpButton = Material(
       elevation: 5.0,
       borderRadius: BorderRadius.circular(30.0),
       color: ColorUtils.themeColor,
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {},
-        child: Text("Login",
+        onPressed: () {
+          //Get the result and deliver it to the back end
+        },
+        child: Text("SignUp",
             textAlign: TextAlign.center,
             style: textStyle.copyWith(
                 color: Colors.white, fontWeight: FontWeight.bold)),
       ),
     );
 
-    final signUpButton = Material(
-      child: MaterialButton(
-        minWidth: MediaQuery.of(context).size.width,
-        padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => RegisterPage()),
-            (Route<dynamic> route) => false,
-          );
-        },
-        child: Text("New User? SIGN UP",
-            textAlign: TextAlign.center, style: TextStyle(color: Colors.black)),
-      ),
-    );
     return Scaffold(
         appBar: AppBar(
           title: Text('Eat-where'),
@@ -80,24 +69,25 @@ class _LoginPageState extends State<LoginPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 145.0,
+                    height: 155.0,
                     child: Image.asset(
                       "assets/images/logo.png", //add logo.png to the page
                       fit: BoxFit.contain,
                     ),
                   ),
-                  SizedBox(height: 55.0),
+                  SizedBox(height: 45.0),
                   usernameField,
                   SizedBox(height: 25.0),
                   passwordField,
+                  SizedBox(height: 25.0),
+                  confirmPassField,
                   SizedBox(
                     height: 35.0,
                   ),
-                  loginButton,
+                  signUpButton,
                   SizedBox(
                     height: 15.0,
                   ),
-                  signUpButton
                 ],
               ),
             ),

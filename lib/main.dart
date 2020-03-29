@@ -1,10 +1,10 @@
 import 'dart:async';
 
-import 'package:eat_where/pages/group_page.dart';
-import 'package:eat_where/pages/home_page.dart';
-import 'package:eat_where/pages/login_page.dart';
-import 'package:eat_where/pages/me_page.dart';
-import 'package:eat_where/utils/color_util.dart';
+import './pages/group_page.dart';
+import './pages/home_page.dart';
+import './pages/login_page.dart';
+import './pages/me_page.dart';
+import './utils/color_util.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
