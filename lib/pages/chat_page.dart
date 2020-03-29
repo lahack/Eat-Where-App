@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+<<<<<<< HEAD
 import 'package:eat_where/utils/color_util.dart';
+=======
+>>>>>>> finished add page
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -16,14 +19,21 @@ class ChatPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ChatPageState();
 }
 
+<<<<<<< HEAD
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
+=======
+class _ChatPageState extends State<ChatPage> {
+>>>>>>> finished add page
 
   List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = new TextEditingController();
   bool _isComposing = false;
+<<<<<<< HEAD
   String _groupName = "";
   int _stage = 0;
   String _dropDownValue = "Date";
+=======
+>>>>>>> finished add page
 
   @override
   void initState() {
@@ -35,6 +45,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         .listen((documentSnapshot) {
           _messages = [];
           List<dynamic> messageList = documentSnapshot.data['messages'];
+<<<<<<< HEAD
 
           setState(() {
             _groupName = documentSnapshot.data['name'];
@@ -56,6 +67,22 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 });
               });
             }
+=======
+          for (int i = 0; i < messageList.length; i++) {
+            String userId = messageList[i]['userId'];
+            String text = messageList[i]['text'];
+            var ref = Firestore.instance.collection('users').document(userId).get().then((ds) {
+              String name = ds.data['name'];
+              ChatMessage message = ChatMessage(name: name, text: text,
+                  animationController: AnimationController(
+                    duration: Duration(milliseconds: 700),
+                  ));
+              setState(() {
+                _messages.insert(0, message);
+              });
+              message.animationController.forward();
+            });
+>>>>>>> finished add page
           }
 //      List<dynamic> groupIdList = documentSnapshot.data['groups'];
 //      _groups = [];
@@ -74,9 +101,12 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   }
 
   void _handleSubmitted(String text) {
+<<<<<<< HEAD
     if (text == null || text.length == 0) {
       return;
     }
+=======
+>>>>>>> finished add page
     _textController.clear();
     setState(() {
       _isComposing = false;
@@ -84,6 +114,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     Firestore.instance.collection('groups')
         .document(widget.currentGroupId)
         .updateData({'messages': FieldValue.arrayUnion(
+<<<<<<< HEAD
         [{
           'text': text,
           'userId': widget.currentUserId,
@@ -91,6 +122,9 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
           }
          ]
     )});
+=======
+        [{'text': text, 'userId': widget.currentUserId}])});
+>>>>>>> finished add page
 //    ChatMessage message = ChatMessage(
 //      name: "Me",
 //      text: text,
@@ -150,6 +184,7 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
+<<<<<<< HEAD
     Widget childWidget = Text("Error");
 
     if (_stage == 0) {
@@ -247,6 +282,17 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                   ),
                   child: childWidget,
                 ),
+=======
+    return Scaffold(
+      appBar: new AppBar(
+          title: new Text("Friendlychat"),
+          elevation:
+          Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0
+      ),
+      body: new Container(
+          child: new Column(
+              children: <Widget>[
+>>>>>>> finished add page
                 new Flexible(
                     child: new ListView.builder(
                       padding: new EdgeInsets.all(8.0),
@@ -263,17 +309,27 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 ),
               ]
           ),
+<<<<<<< HEAD
       ),
+=======
+          decoration: Theme.of(context).platform == TargetPlatform.iOS ? new BoxDecoration(border: new Border(top: new BorderSide(color: Colors.grey[200]))) : null),//new
+>>>>>>> finished add page
     );
   }
 
   @override
   void dispose() {
+<<<<<<< HEAD
+=======
+    for (ChatMessage message in _messages)
+      message.animationController.dispose();
+>>>>>>> finished add page
     super.dispose();
   }
 }
 
 class ChatMessage extends StatelessWidget {
+<<<<<<< HEAD
   ChatMessage({this.name, this.text, this.isCurrentUser});
   final String name;
   final String text;
@@ -324,6 +380,44 @@ class ChatMessage extends StatelessWidget {
             ),
           ],
         ),
+=======
+  ChatMessage({this.name, this.text, this.animationController});
+  final String name;
+  final String text;
+  final AnimationController animationController;
+  @override
+  Widget build(BuildContext context) {
+    return new SizeTransition(
+        sizeFactor: new CurvedAnimation(
+            parent: animationController,
+            curve: Curves.easeOut
+        ),
+        axisAlignment: 0.0,
+        child: new Container(
+          margin: const EdgeInsets.symmetric(vertical: 10.0),
+          child: new Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Container(
+                margin: const EdgeInsets.only(right: 16.0),
+                child: new CircleAvatar(child: new Text(name)),
+              ),
+              new Expanded(
+                child: new Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    new Text(name, style: Theme.of(context).textTheme.subhead),
+                    new Container(
+                      margin: const EdgeInsets.only(top: 5.0),
+                      child: new Text(text),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        )
+>>>>>>> finished add page
     );
   }
 }
