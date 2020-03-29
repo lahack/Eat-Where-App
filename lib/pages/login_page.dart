@@ -29,7 +29,7 @@ class _LoginPageState extends State<LoginPage> {
               onPressed: () {
                 Navigator.pushAndRemoveUntil(
                   context,
-                  MaterialPageRoute(builder: (context) => Home()),
+                  MaterialPageRoute(builder: (context) => Home("")),
                       (Route<dynamic> route) => false,
                 );
               },
