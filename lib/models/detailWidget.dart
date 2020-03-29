@@ -82,7 +82,7 @@ class DetailWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: Image.network(
-                recommendations[recommendationIndex].imageLink,
+                recommendations[recommendationIndex].mapLink,
                 fit: BoxFit.cover,
                 repeat: ImageRepeat.noRepeat,
                 height: 150,

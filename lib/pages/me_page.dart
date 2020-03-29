@@ -53,7 +53,7 @@ class _MePageState extends State<MePage> {
                         image: new DecorationImage(
                             fit: BoxFit.fill,
                             image: new NetworkImage(
-                                "https://i.imgur.com/BoN9kdC.png")
+                                "http://icons.iconarchive.com/icons/diversity-avatars/avatars/256/batman-icon.png")
                         )
                     )
                 ),
