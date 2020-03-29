@@ -7,6 +7,10 @@ import 'package:flutter/material.dart';
 import '../models/overviewidget.dart';
 import '../models/detailWidget.dart';
 import '../models/cafeInfo.dart';
+
+import 'package:http/http.dart' as http;
+
+import 'package:geolocator/geolocator.dart';
 /*
   Home tab.
 
@@ -29,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   List<CafeInfo> _recommendations;
   int _recommendationIndex = 0;
 
-  Function DummyInit() {
+  void DummyInit() {
     //For debug Use only
     _recommendations = new List(3);
     String imageLink =
@@ -39,7 +43,7 @@ class _HomePageState extends State<HomePage> {
     String imageType = 'Cafeteria';
     int walkMin = 17;
     double stars = 4.5;
-    String mapLink =  'https://magazine.viterbi.usc.edu/wp-content/uploads/Kelly_Sanders_121.jpg';
+    String mapLink =  'https://storage.googleapis.com/support-forums-api/attachment/thread-2851431-14251814094790275470.png';
     String address = '21 Fake addr Los Angeles Ca';
     String phoneNum = "213-349-3930";
     var parkside = new CafeInfo(
@@ -55,22 +59,41 @@ class _HomePageState extends State<HomePage> {
     parkside.foodImageLinks = new List<String>(3);
     parkside.foodNames = new List<String>(3);
     parkside.foodImageLinks[0] =
-        'https://magazine.viterbi.usc.edu/wp-content/uploads/Kelly_Sanders_121.jpg';
+        'https://hips.hearstapps.com/del.h-cdn.co/assets/17/28/1499895456-greek-salad-delish.jpg';
     parkside.foodNames[0] = "Salad";
     parkside.foodImageLinks[1] =
-        'https://magazine.viterbi.usc.edu/wp-content/uploads/Kelly_Sanders_121.jpg';
-    parkside.foodNames[1] = "Salad";
+        'https://images.pitboss-grills.com/catalog/recipes/1200px/Reverse-Seared-NY-Steak.jpg';
+    parkside.foodNames[1] = "Steak";
     parkside.foodImageLinks[2] =
-        'https://magazine.viterbi.usc.edu/wp-content/uploads/Kelly_Sanders_121.jpg';
-    parkside.foodNames[2] = "Salad";
+        'https://recipes-secure-graphics.grocerywebsite.com/0_GraphicsRecipes/4589_4k.jpg';
+    parkside.foodNames[2] = "Burger";
     _recommendations[0] = parkside;
     _recommendations[1] = parkside;
     _recommendations[2] = parkside;
   }
 
-  Function GetRecommendations() {
+  Future<void> GetRecommendations() async {
     //TODO: GET Recommendations from backend
     DummyInit();
+
+//    Position position = await Geolocator().getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
+//    print(position.latitude.toString());
+//    print(position.longitude.toString());
+
+      int longitude = 100, latitude = 120;
+      String baseUrl = "https://go-eat-la.herokuapp.com/api/";
+
+//    var queryParameters = "{
+//      'purpose': 'SINGLE',
+//      'user_id': ['1'], 'force': 0, 'location': [longitude, latitude]}";
+
+//    var uri =
+//    Uri.https('https://go-eat-la.herokuapp.com/', 'api/purpose=SINGLE?user_id=[1]?force=0?location=[$longitude, $latitude]');
+
+//    var response = await http.get("https://go-eat-la.herokuapp.com/api?purpose=SINGLE&user_id=[1]&force=0&location=[$longitude, $latitude]");
+//    print(response.body);
+    String restaurant_id = "1";
+    print(restaurant_id);
   }
 
   @override
@@ -180,9 +203,6 @@ class _HomePageState extends State<HomePage> {
     return Container(
       margin: EdgeInsets.all(5.0),
       child: Scaffold(
-          appBar: AppBar(
-            title: Text('Recommedation For You'),
-          ),
           body: Align(
             alignment: Alignment(-1.0, -1.0),
             child: Container(
