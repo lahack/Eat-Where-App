@@ -1,5 +1,7 @@
 //import 'package:eat_where/main.dart';
+import 'package:eat_where/main.dart';
 import 'package:eat_where/pages/register_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
@@ -20,6 +22,21 @@ class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   String _password;
   String _username;
+
+  Future<void> _fireAuthSignIn() async {
+    FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: _username, password: _password)
+        .then((authResult) {
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
+                (Route<dynamic> route) => false,
+          );
+        })
+        .catchError((error) {
+          print(error);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -65,19 +82,14 @@ class _LoginPageState extends State<LoginPage> {
       child: MaterialButton(
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-        onPressed: () {
+        onPressed: () async {
           final form = _formKey.currentState;
           form.save();
 
           if (form.validate()) {
             print('username: $_username, password: $_password');
             //TODO -> GO TO FIREBASE AND TRAVERSE TO ANOTHER PAGE
-
-            Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => HomePage()),
-            (Route<dynamic> route) => false,
-          );
+            _fireAuthSignIn();
           }
         },
         child: Text("Login",
@@ -92,10 +104,9 @@ class _LoginPageState extends State<LoginPage> {
         minWidth: MediaQuery.of(context).size.width,
         padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
         onPressed: () {
-          Navigator.pushAndRemoveUntil(
+          Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => RegisterPage()),
-            (Route<dynamic> route) => false,
+            MaterialPageRoute(builder: (context) => RegisterPage())
           );
         },
         child: Text("New User? SIGN UP",
@@ -104,7 +115,9 @@ class _LoginPageState extends State<LoginPage> {
     );
     return Scaffold(
         appBar: AppBar(
-          title: Text('Eat-where'),
+          title: Text('Eat-where',
+            style: TextStyle(color: ColorUtils.lightColor),
+          ),
         ),
         body: Center(
           child: Container(
