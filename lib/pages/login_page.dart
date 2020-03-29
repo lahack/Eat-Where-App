@@ -27,10 +27,16 @@ class _LoginPageState extends State<LoginPage> {
     FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _username, password: _password)
         .then((authResult) {
+<<<<<<< HEAD
           print(authResult.user.uid);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => Home("1", 0)),
+=======
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
+>>>>>>> update
                 (Route<dynamic> route) => false,
           );
         })

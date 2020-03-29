@@ -23,7 +23,11 @@ class _RegisterPageState extends State<RegisterPage> {
         .then((authResult) {
       Navigator.pushAndRemoveUntil(
         context,
+<<<<<<< HEAD
         MaterialPageRoute(builder: (context) => Home(authResult.user.uid, 0)),
+=======
+        MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
+>>>>>>> update
             (Route<dynamic> route) => false,
       );
     })
