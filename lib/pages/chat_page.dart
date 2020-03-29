@@ -281,9 +281,9 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         ],
       );
     }
-    else if (_stage == 1) {
-      childWidget = 
-    }
+//    else if (_stage == 1) {
+//      childWidget =
+//    }
 
 <<<<<<< HEAD
     return Scaffold(
