@@ -90,7 +90,7 @@ class _HomeState extends State<Home> {
     _tabIndex = 0;
     _pages = <Widget>[
       HomePage(),
-      GroupPage("a2Ld6Y1JSohBif93tfIT"),   // TODO: DEBUG
+      GroupPage(widget.currentUserId),   // TODO: DEBUG
       MePage()
     ];
   }

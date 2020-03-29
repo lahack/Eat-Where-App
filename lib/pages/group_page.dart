@@ -66,7 +66,7 @@ class _GroupPageState extends State<GroupPage> {
         ),
         onPressed: (){
           Navigator.push(context, MaterialPageRoute(builder: (context) {
-            return AddGroupPage();
+            return AddGroupPage(widget.currentUserId);
           }));
         },
       ),
