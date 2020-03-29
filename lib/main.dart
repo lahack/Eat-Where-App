@@ -104,6 +104,7 @@ class _HomeState extends State<Home> {
 
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: Text(
           _pageTitles[_tabIndex],
           style: TextStyle(color: ColorUtils.lightColor),
