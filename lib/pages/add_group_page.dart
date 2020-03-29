@@ -91,6 +91,7 @@ class _AddGroupPageState extends State<AddGroupPage> {
                     MaterialPageRoute(
                         builder: (context) =>
 <<<<<<< HEAD
+<<<<<<< HEAD
 //                            ChatPage(widget.currentUserId, ref.documentID)
                               Home(widget.currentUserId, 1)
                     ),
@@ -100,6 +101,11 @@ class _AddGroupPageState extends State<AddGroupPage> {
 >>>>>>> finished add page
 =======
                             ChatPage(widget.currentUserId, ref.documentID)),
+=======
+//                            ChatPage(widget.currentUserId, ref.documentID)
+                              Home(widget.currentUserId, 1)
+                    ),
+>>>>>>> Group chat first stage
                         (Route<dynamic> route) => false
                 );
               }

@@ -33,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => Home("1", 0)),
+<<<<<<< HEAD
 =======
 =======
           print(authResult.user.uid);
@@ -41,6 +42,8 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
 >>>>>>> update
+=======
+>>>>>>> Group chat first stage
                 (Route<dynamic> route) => false,
           );
         })
