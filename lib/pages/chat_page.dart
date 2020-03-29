@@ -1,12 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'package:eat_where/utils/color_util.dart';
-=======
->>>>>>> finished add page
-=======
+
 import 'package:eat_where/utils/color_util.dart';
->>>>>>> Group chat first stage
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -23,31 +18,15 @@ class ChatPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ChatPageState();
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
 class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
-=======
-class _ChatPageState extends State<ChatPage> {
->>>>>>> finished add page
-=======
-class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
->>>>>>> Group chat first stage
 
   List<ChatMessage> _messages = <ChatMessage>[];
   final TextEditingController _textController = new TextEditingController();
   bool _isComposing = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
+
   String _groupName = "";
   int _stage = 0;
   String _dropDownValue = "Date";
-=======
->>>>>>> finished add page
-=======
-  String _groupName = "";
-  int _stage = 0;
-  String _dropDownValue = "Date";
->>>>>>> Group chat first stage
 
   @override
   void initState() {
@@ -59,10 +38,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
         .listen((documentSnapshot) {
           _messages = [];
           List<dynamic> messageList = documentSnapshot.data['messages'];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Group chat first stage
 
           setState(() {
             _groupName = documentSnapshot.data['name'];
@@ -82,30 +57,10 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 setState(() {
                   _messages.insert(0, message);
                 });
-<<<<<<< HEAD
               });
             }
-=======
-          for (int i = 0; i < messageList.length; i++) {
-            String userId = messageList[i]['userId'];
-            String text = messageList[i]['text'];
-            var ref = Firestore.instance.collection('users').document(userId).get().then((ds) {
-              String name = ds.data['name'];
-              ChatMessage message = ChatMessage(name: name, text: text,
-                  animationController: AnimationController(
-                    duration: Duration(milliseconds: 700),
-                  ));
-              setState(() {
-                _messages.insert(0, message);
-              });
-              message.animationController.forward();
-            });
->>>>>>> finished add page
-=======
-              });
             }
->>>>>>> Group chat first stage
-          }
+          });
 //      List<dynamic> groupIdList = documentSnapshot.data['groups'];
 //      _groups = [];
 //
@@ -119,22 +74,12 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 //          print(_groups[0].name);
 //        });
 //      }
-    });
   }
 
   void _handleSubmitted(String text) {
-<<<<<<< HEAD
-<<<<<<< HEAD
     if (text == null || text.length == 0) {
       return;
     }
-=======
->>>>>>> finished add page
-=======
-    if (text == null || text.length == 0) {
-      return;
-    }
->>>>>>> Group chat first stage
     _textController.clear();
     setState(() {
       _isComposing = false;
@@ -142,10 +87,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
     Firestore.instance.collection('groups')
         .document(widget.currentGroupId)
         .updateData({'messages': FieldValue.arrayUnion(
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Group chat first stage
         [{
           'text': text,
           'userId': widget.currentUserId,
@@ -153,12 +94,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
           }
          ]
     )});
-<<<<<<< HEAD
-=======
-        [{'text': text, 'userId': widget.currentUserId}])});
->>>>>>> finished add page
-=======
->>>>>>> Group chat first stage
 //    ChatMessage message = ChatMessage(
 //      name: "Me",
 //      text: text,
@@ -218,10 +153,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> Group chat first stage
     Widget childWidget = Text("Error");
 
     if (_stage == 0) {
@@ -285,7 +216,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
 //      childWidget =
 //    }
 
-<<<<<<< HEAD
     return Scaffold(
       appBar: new AppBar(
           title: new Text(_groupName,
@@ -320,47 +250,6 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                   ),
                   child: childWidget,
                 ),
-=======
-=======
->>>>>>> Group chat first stage
-    return Scaffold(
-      appBar: new AppBar(
-          title: new Text(_groupName,
-            style: TextStyle(color: ColorUtils.lightColor),
-          ),
-          elevation:
-          Theme.of(context).platform == TargetPlatform.iOS ? 0.0 : 4.0
-      ),
-      body: new SafeArea(
-          child: new Column(
-              children: <Widget>[
-<<<<<<< HEAD
->>>>>>> finished add page
-=======
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(5),
-                  height: 200,
-                  width: 300,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.8),
-                        blurRadius: 2, // has the effect of softening the shadow
-                        spreadRadius: 2, // has the effect of extending the shadow
-                        offset: Offset(
-                          1, // horizontal, move right 10
-                          2, // vertical, move down 10
-                        ),
-                      )
-                    ],
-                    border: Border.all(color: ColorUtils.borderColor),
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                  ),
-                  child: childWidget,
-                ),
->>>>>>> Group chat first stage
                 new Flexible(
                     child: new ListView.builder(
                       padding: new EdgeInsets.all(8.0),
@@ -377,35 +266,17 @@ class _ChatPageState extends State<ChatPage> with TickerProviderStateMixin {
                 ),
               ]
           ),
-<<<<<<< HEAD
-<<<<<<< HEAD
       ),
-=======
-          decoration: Theme.of(context).platform == TargetPlatform.iOS ? new BoxDecoration(border: new Border(top: new BorderSide(color: Colors.grey[200]))) : null),//new
->>>>>>> finished add page
-=======
-      ),
->>>>>>> Group chat first stage
     );
   }
 
   @override
   void dispose() {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-    for (ChatMessage message in _messages)
-      message.animationController.dispose();
->>>>>>> finished add page
-=======
->>>>>>> Group chat first stage
     super.dispose();
   }
 }
 
 class ChatMessage extends StatelessWidget {
-<<<<<<< HEAD
-<<<<<<< HEAD
   ChatMessage({this.name, this.text, this.isCurrentUser});
   final String name;
   final String text;
@@ -456,67 +327,7 @@ class ChatMessage extends StatelessWidget {
             ),
           ],
         ),
-=======
-  ChatMessage({this.name, this.text, this.animationController});
-=======
-  ChatMessage({this.name, this.text, this.isCurrentUser});
->>>>>>> Group chat first stage
-  final String name;
-  final String text;
-  final bool isCurrentUser;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: !isCurrentUser ? Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(child: new Text(name, style: TextStyle(fontSize: 10),)),
-            ),
-            new Expanded(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(text),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ) : Row(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            new Expanded(
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: <Widget>[
-                  new Text(name, style: TextStyle(fontWeight: FontWeight.bold)),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 5.0),
-                    child: new Text(text),
-                  ),
-                ],
-              ),
-<<<<<<< HEAD
-            ],
-          ),
-        )
->>>>>>> finished add page
-=======
-            ),
-            new Container(
-              margin: const EdgeInsets.only(left: 16.0),
-              child: new CircleAvatar(child: new Text(name, style: TextStyle(fontSize: 10),)),
-            ),
-          ],
-        ),
->>>>>>> Group chat first stage
     );
   }
 }

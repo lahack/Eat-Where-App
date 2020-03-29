@@ -23,15 +23,7 @@ class _RegisterPageState extends State<RegisterPage> {
         .then((authResult) {
       Navigator.pushAndRemoveUntil(
         context,
-<<<<<<< HEAD
-<<<<<<< HEAD
         MaterialPageRoute(builder: (context) => Home(authResult.user.uid, 0)),
-=======
-        MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
->>>>>>> update
-=======
-        MaterialPageRoute(builder: (context) => Home(authResult.user.uid, 0)),
->>>>>>> Group chat first stage
             (Route<dynamic> route) => false,
       );
     })

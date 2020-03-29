@@ -27,23 +27,11 @@ class _LoginPageState extends State<LoginPage> {
     FirebaseAuth.instance.signInWithEmailAndPassword(
         email: _username, password: _password)
         .then((authResult) {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
           print(authResult.user.uid);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(builder: (context) => Home("1", 0)),
-<<<<<<< HEAD
-=======
-=======
-          print(authResult.user.uid);
->>>>>>> finished add page
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
->>>>>>> update
-=======
->>>>>>> Group chat first stage
                 (Route<dynamic> route) => false,
           );
         })

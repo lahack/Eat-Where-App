@@ -1,17 +1,14 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 import 'package:eat_where/pages/group_manage.dart';
-=======
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eat_where/pages/chat_page.dart';
 import 'package:eat_where/pages/group_page.dart';
 import 'package:eat_where/utils/color_util.dart';
->>>>>>> finished add page
-=======
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eat_where/pages/chat_page.dart';
 import 'package:eat_where/utils/color_util.dart';
->>>>>>> finished add page
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -61,17 +58,6 @@ class _AddGroupPageState extends State<AddGroupPage> {
             child: Text("Done",
               style: TextStyle(fontSize: 18, color: ColorUtils.lightColor),
             ),
-<<<<<<< HEAD
-<<<<<<< HEAD
-            onPressed: () {
-              // TODO: validate input and send data to chat page
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => GroupManage()),
-              );
-=======
-=======
->>>>>>> finished add page
             onPressed: () async {
               print("Done button pressed");
               // TODO: publish to firebase
@@ -81,7 +67,8 @@ class _AddGroupPageState extends State<AddGroupPage> {
                   'date' : Timestamp.fromDate(_initialDate),
                   'name' : name,
                   'owner' : widget.currentUserId,
-                  'members' : [widget.currentUserId]
+                  'members' : [widget.currentUserId],
+                  'stage' : 0
                 });
                 Firestore.instance.collection('users')
                     .document(widget.currentUserId)
@@ -90,26 +77,12 @@ class _AddGroupPageState extends State<AddGroupPage> {
                 Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(
                         builder: (context) =>
-<<<<<<< HEAD
-<<<<<<< HEAD
 //                            ChatPage(widget.currentUserId, ref.documentID)
                               Home(widget.currentUserId, 1)
                     ),
                         (Route<dynamic> route) => false
                 );
               }
->>>>>>> finished add page
-=======
-                            ChatPage(widget.currentUserId, ref.documentID)),
-=======
-//                            ChatPage(widget.currentUserId, ref.documentID)
-                              Home(widget.currentUserId, 1)
-                    ),
->>>>>>> Group chat first stage
-                        (Route<dynamic> route) => false
-                );
-              }
->>>>>>> finished add page
             },
           )
         ],
