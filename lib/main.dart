@@ -28,6 +28,7 @@ Future<void> main() async {
 //  String currentUserId = await auth.signIn(email, password);
   if (email == null || password == null) {
     runApp(App(false, ""));
+    return;
   }
 
   FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -88,7 +89,7 @@ class _HomeState extends State<Home> {
     _tabIndex = 0;
     _pages = <Widget>[
       HomePage(),
-      GroupPage(widget.currentUserId),
+      GroupPage("a2Ld6Y1JSohBif93tfIT"),   // TODO: DEBUG
       MePage()
     ];
   }
