@@ -30,7 +30,7 @@ class _LoginPageState extends State<LoginPage> {
           print(authResult.user.uid);
           Navigator.pushAndRemoveUntil(
             context,
-            MaterialPageRoute(builder: (context) => Home(authResult.user.uid)),
+            MaterialPageRoute(builder: (context) => Home("1", 0)),
                 (Route<dynamic> route) => false,
           );
         })

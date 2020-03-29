@@ -58,7 +58,7 @@ class App extends StatelessWidget {
         primarySwatch: ColorUtils.themeColor,
       ),
       // If user is logged in, direct to Home. Otherwise, show the LoginPage.
-      home: hasValidated ? Home(currentUserId) : LoginPage(),
+      home: hasValidated ? Home(currentUserId, 0) : LoginPage(),
     );
   }
 }
@@ -68,8 +68,9 @@ class App extends StatelessWidget {
  */
 class Home extends StatefulWidget {
   final String currentUserId;
+  final int initIndex;
 
-  Home(this.currentUserId);
+  Home(this.currentUserId, this.initIndex);
 
   @override
   _HomeState createState() => _HomeState();
@@ -87,7 +88,7 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    _tabIndex = 0;
+    _tabIndex = widget.initIndex;
     _pages = <Widget>[
       HomePage(),
       GroupPage(widget.currentUserId),   // TODO: DEBUG

@@ -3,10 +3,13 @@ import 'package:eat_where/pages/group_manage.dart';
 =======
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:eat_where/pages/chat_page.dart';
+import 'package:eat_where/pages/group_page.dart';
 import 'package:eat_where/utils/color_util.dart';
 >>>>>>> finished add page
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+import '../main.dart';
 
 /*
   Asks user to input group name and pick a date (or range).
@@ -78,7 +81,9 @@ class _AddGroupPageState extends State<AddGroupPage> {
                 Navigator.pushAndRemoveUntil(context,
                     MaterialPageRoute(
                         builder: (context) =>
-                            ChatPage(widget.currentUserId, ref.documentID)),
+//                            ChatPage(widget.currentUserId, ref.documentID)
+                              Home(widget.currentUserId, 1)
+                    ),
                         (Route<dynamic> route) => false
                 );
               }
